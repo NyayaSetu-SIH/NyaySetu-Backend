@@ -13,7 +13,7 @@ import axios from 'axios';
 const app = express();
 dotenv.config();
 
-const PORT = 8000;
+const PORT = 8000 || process.env.PORT;
 
 app.use(
     cookieSession({
@@ -29,7 +29,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: "https://https://nyaysetu.netlify.app/",
         methods:"GET,PUT,POST,DELETE",
         credentials:true
     })
@@ -67,7 +67,6 @@ app.post('/translate', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
-
 
 
 
