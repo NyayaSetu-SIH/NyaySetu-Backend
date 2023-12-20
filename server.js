@@ -29,7 +29,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(
     cors({
-        origin: "https://https://nyaysetu.netlify.app/",
+        origin: "https://nyaysetu.netlify.app/",
         methods:"GET,PUT,POST,DELETE",
         credentials:true
     })
