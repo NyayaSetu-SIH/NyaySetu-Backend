@@ -16,7 +16,7 @@ import fs from 'fs';
 const app = express();
 dotenv.config();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(
     cookieSession({
@@ -32,7 +32,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(
     cors({
-        origin: "http://localhost:3000",
+        origin: "*",
         methods:"GET,PUT,POST,DELETE",
         credentials:true
     })
@@ -41,51 +41,12 @@ app.use(
 app.use("/auth",authRoute);
 
 app.use("/",Router);
-
-// app.post('/api/summarize', async (req, res) => {
-//   console.log(req);
-//   try {
-//     const { language, text, min_length, max_length } = req.body;
-//     const API_KEY = 'mqUodwawpAFxPhiioYQIRWXSFmAFnvLPGItfgTZLwDHdRiafLj';
-
-//     const response = await axios.post('https://portal.ayfie.com/api/summarize', {
-//       language,
-//       text,
-//       min_length,
-//       max_length
-//     }, {
-//       headers: {
-//         'X-API-KEY': API_KEY,
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//       }
-//     });
-
-//     // Send the summarized data received from the external API back to the frontend
-//     res.status(response.status).json(response.data);
-//     console.log(response);
-//   } catch (error) {
-//     if (error.response) {
-//       console.error('Server Error:', error.response.data);
-//       res.status(error.response.status).json({ error: 'Server Error' });
-//     } else if (error.request) {
-//       console.error('Request Error:', error.request);
-//       res.status(404).json({ error1: 'Request Error' });
-//     } else {
-//       console.error('Error:', error.message);
-//       res.status(500).json({ error2: 'Internal Server Error' });
-//     }
-//   }
-// });
-
-
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 app.post('/api/converter', upload.single('file'), async (req, res) => {
   try {
-    const API_KEY = 'mqUodwawpAFxPhiioYQIRWXSFmAFnvLPGItfgTZLwDHdRiafLj';
+    const API_KEY = process.env.API_KEY || 'mqUodwawpAFxPhiioYQIRWXSFmAFnvLPGItfgTZLwDHdRiafLj';
     const formData = new FormData();
     formData.append('file', req.file.buffer, {
       filename: req.file.originalname,
