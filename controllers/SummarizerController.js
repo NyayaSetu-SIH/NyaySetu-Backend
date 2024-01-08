@@ -5,7 +5,7 @@ dotenv.config();
 export const summarizeText = async (req, res) => {
   try {
     const { language, text, min_length, max_length } = req.body;
-    const API_KEY = process.env.API_KEY || 'mqUodwawpAFxPhiioYQIRWXSFmAFnvLPGItfgTZLwDHdRiafLj';
+    const API_KEY = process.env.API_KEY;
 
     const response = await axios.post('https://portal.ayfie.com/api/summarize', {
       language,

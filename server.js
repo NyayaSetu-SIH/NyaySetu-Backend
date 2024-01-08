@@ -32,7 +32,7 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(
     cors({
-        origin: "*",
+        origin: "http://localhost:3000",
         methods:"GET,PUT,POST,DELETE",
         credentials:true
     })
@@ -46,7 +46,7 @@ const upload = multer({ storage: storage });
 
 app.post('/api/converter', upload.single('file'), async (req, res) => {
   try {
-    const API_KEY = process.env.API_KEY || 'mqUodwawpAFxPhiioYQIRWXSFmAFnvLPGItfgTZLwDHdRiafLj';
+    const API_KEY = process.env.API_KEY;
     const formData = new FormData();
     formData.append('file', req.file.buffer, {
       filename: req.file.originalname,
