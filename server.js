@@ -16,7 +16,7 @@ import fs from 'fs';
 const app = express();
 dotenv.config();
 
-const PORT ='https://nyaysetu-backend.onrender.com';
+const PORT = process.env.PORT || 8000;
 
 app.use(
     cookieSession({
