@@ -17,6 +17,7 @@ const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT || 8000;
+app.use(cors());
 
 app.use(
     cookieSession({
@@ -27,12 +28,11 @@ app.use(
 )
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors());
 app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(
     cors({
-        origin:`${process.env.CLIENT_URL}`,
+        origin:'http://localhost:3000',
         methods:"GET,PUT,POST,DELETE",
         credentials:true
     })
