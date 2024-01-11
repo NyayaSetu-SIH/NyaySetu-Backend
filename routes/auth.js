@@ -22,6 +22,7 @@ router.get("/login/success",(req,res) =>{
         })
     }
     else{
+        console.log(req.user);
         res.status(403).json({error:true,message:"Not Authorized"})
     }
 })
