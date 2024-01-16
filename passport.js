@@ -4,6 +4,7 @@ import passport from 'passport';
 
 dotenv.config();
 passport.use(new GoogleStrategy({
+    RedirectURL:  "postmessage",
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "/auth/google/callback",
